@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import ToDoItem from './toDoitem'
+import ToDoItem from './toDoitem';
+import InputArea from "./InputArea";
 
 function App() {
   const [inputData, setInputData] = useState([]);
@@ -30,12 +31,11 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <div className="form">
-        <input type="text" onChange={HandleChange} value={text} />
-        <button onClick={HandleClick}>
-          <span>Add</span>
-        </button>
-      </div>
+      <InputArea
+        onChanging={HandleChange}
+        value={text}
+        onClicking={HandleClick}
+      />
       <div>
         <ul>
           {inputData.map((data, index) => {
