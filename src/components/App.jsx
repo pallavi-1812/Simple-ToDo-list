@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ToDoItem from './toDoitem'
 
 function App() {
   const [inputData, setInputData] = useState([]);
@@ -9,11 +10,19 @@ function App() {
     setText(newData);
   }
 
-  function HandleClick(){
-    setInputData((prevData)=>{
+  function HandleClick() {
+    setInputData((prevData) => {
       return [...prevData, text];
     });
     setText("");
+  }
+
+  function DeleteItem(id) {
+    setInputData((prevData) => {
+      return prevData.filter((data, index) => {
+        return index !== id;
+      });
+    });
   }
 
   return (
@@ -29,9 +38,9 @@ function App() {
       </div>
       <div>
         <ul>
-          {inputData.map((data) => {
-            return(
-              <li>{data}</li>
+          {inputData.map((data, index) => {
+            return (
+              <ToDoItem key={index} id={index} text={data} onChecked={DeleteItem} />
             );
           })}
         </ul>
